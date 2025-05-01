@@ -1,0 +1,50 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rules\Password;
+
+class RegisteredUserController extends Controller
+{
+    //
+
+    public function create(){
+        return view('auth.register');
+    }
+
+    public function store(){
+        
+        //return view('auth.register');
+        //dd(request()->all());
+        // $validatedAttributes = request()->validate([
+        //     'first_name' => ['required'],
+        //     'last_name' => ['required'],
+        //     'email' => ['required','email'],
+        //     'password' => ['required','confirmed']
+        // ]);
+
+        $attributes = request()->validate([
+            'first_name' =>['required'],
+            'last_name' =>['required'],
+            'email' =>['required','email'],
+            'password' =>['required']
+        ]);
+
+        //dd($validatedAttributes);
+        $user = User::create($attributes);
+
+        Auth::login($user);
+
+        return redirect('/jobs');
+
+        // User:create([
+            // 'first_name' => request('first_name'),
+            // 'last_name' => request('last_name'),
+            // 'email' => request('email'),
+            // 'password' => request('password')
+        // ]);
+    }
+}
