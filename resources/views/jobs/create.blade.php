@@ -19,7 +19,7 @@
         <x-form-field>
           <x-form-label for="salary">Salary</x-form-label>
           <div class="mt-2">
-            <x-form-input type='text' name='title' id='salary' value="{{ old('salary') }}" placeholder="$50000 per year" required />
+            <x-form-input type='text' name='salary' id='salary' value="{{ old('salary') }}" placeholder="$50000 per year" required />
             <x-form-error name="salary" />
           </div>
         </x-form-field>

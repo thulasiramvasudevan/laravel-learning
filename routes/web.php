@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
+use App\Jobs\TranslateJob;
 use App\Models\Job;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\RegisteredUserController;
@@ -48,3 +49,10 @@ Route::post('/register',[RegisteredUserController::Class, 'store']);
 Route::get('/login', [SessionController::class, 'create'])->name('login');
 Route::post('/login', [SessionController::class, 'store']);
 Route::get('/logout',[SessionController::Class, 'destroy']);
+
+
+Route::get('testemail', function(){
+    $job = Job::first();
+    TranslateJob::dispatch($job);
+    return 'Done';
+});
